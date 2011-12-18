@@ -7,30 +7,29 @@ local HSLtoRGB = color.HSLtoRGB
 
 --------------------------------------------------------------------------------
 -- EZ GL
-function initgl (mode)
+function initGL (mode)
    local mode = mode or "alpha"
    print(mode)
    -- TODO: init GL with blend func!
 end
 
-
-function clearscreen ()
+function clearScreen ()
    -- TODO: clear screen
 end
 
-function setcolor (r, g, b, a)
+function setColor (r, g, b, a)
    gl.Color(r, g, b, a)
 end
 
-function setcolor255(r,g,b,a)
+function setColor255(r,g,b,a)
    setColor(r/255,g/255,b/255,a/255)
 end
 
-function setcolorhsl(h,s,l,a)
+function setColorHSL(h,s,l,a)
    setColor(unpack(HSLtoRGB({h,s,l,a})))
 end
 
-function setlinewidth(width)
+function setLineWidth(width)
    gl.LineWidth(width)
 end
 
