@@ -1,3 +1,6 @@
+local gl = require("opengl")
+local GL = gl
+
 local color = require("color")
 local RGBtoHSL = color.RGBtoHSL
 local HSLtoRGB = color.HSLtoRGB
@@ -7,6 +10,12 @@ local HSLtoRGB = color.HSLtoRGB
 function initgl (mode)
    local mode = mode or "alpha"
    print(mode)
+   -- TODO: init GL with blend func!
+end
+
+
+function clearscreen ()
+   -- TODO: clear screen
 end
 
 function setcolor (r, g, b, a)
