@@ -8,6 +8,20 @@ I won't concentrate much on programming elegance or so... the modules create a l
 
 --------------------------------------------------------------------------------
 
+Instructions
+____________
+
+1. clone the repository or download the lib folder
+2. rename that lib folder to 'rukano'
+3. require files like:
+
+require("rukano.Math")
+require("rukano.Graphics")
+require("rukano.Patterns")
+win = require("rukano.Window")
+
+--------------------------------------------------------------------------------
+
 Patterns
 ========
 
