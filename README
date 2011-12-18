@@ -1,0 +1,7 @@
+Libraries for easy coding in LuaAV
+===================================
+
+This library is for my personal use. If you like it, you can use it.
+I won't concentrate much on programming elegance or so... the modules create a lot of globals and lots of stuff could be optimized. But anyway, this is what I use to make animations in LuaAV
+
+* TODO: copy and adapt some stuff from the processing library
