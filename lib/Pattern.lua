@@ -1,9 +1,10 @@
--- helper functions
-function wrap (t, i)
+--------------------------------------------------------------------------------
+-- local helper functions
+local function wrap (t, i)
    return t[ ((i-1) % #t) + 1]
 end
 
-function inheritsFrom ( base_class )
+local function inheritsFrom ( base_class )
    local new_class = {}
    new_class.__index = new_class
    new_class.__call = function (self, ...) return self:create(...) end
@@ -21,7 +22,8 @@ function inheritsFrom ( base_class )
    return new_class
 end
 
--- Pattern
+--------------------------------------------------------------------------------
+-- MAIN CLASS
 Pattern = inheritsFrom( )
 
 function Pattern:create (...)
@@ -41,6 +43,9 @@ end
 function Pattern:next ()
    return self:func()
 end
+
+--------------------------------------------------------------------------------
+-- SUBCLASSES
 
 -- Pseq
 Pseq = inheritsFrom( Pattern )
@@ -123,8 +128,6 @@ Place
 Pclump
 Pstutter
 Pn
-   --]]
-
 
 -- test
 b = Pseq({1,2,3,4})
@@ -139,4 +142,4 @@ for i=1, 10 do
    print("Pwhite:", d:next())
    print("Piwhite:", e:next())
 end
-
+--]]

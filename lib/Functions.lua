@@ -1,67 +1,43 @@
-local gl = require("opengl")
-local GL = gl
-local sketch = require("opengl.sketch")
-local Draw = require("opengl.Draw")
-local Window = Window
-
-local color = require("color")
-local RGBtoHSL = color.RGBtoHSL
-local HSLtoRGB = color.HSLtoRGB
-
-local unpack = unpack
-local print = print
-local pairs, ipairs = pairs, ipairs
-local require = require
-
-local math = math
-local sin = math.sin
-local cos = math.cos
-local tan = math.tan
-local pi = math.pi
-
-local now = now
-local wait = wait
-local event = event
-local go = go
-
-local _G = _G
-
-
-module("ezlib")
-
 --------------------------------------------------------------------------------
--- EZ MATH -- should be in modue? or global?
+-- EZ MATH
 
-pi = math.pi
+PI = math.pi
 sin = math.sin
 cos = math.cos
 tan = math.tan
--- max = math.max
--- min = math.min
--- ceil = math.ceil
--- floor = math.floor
+ceil = math.ceil
+floor = math.floor
 rand = math.rand
 
 --------------------------------------------------------------------------------
--- EZ WRAPPERS
-
+-- NUMBERS
 function even (num)
-   if math.floor(num % 2) == 0 then
-      return true
-   else
-      return false
-   end
+   if math.floor(num % 2) == 0 then return true else return false end
 end
 
 function odd (num)
-   if math.floor(num % 2) == 1 then
-      return true
-   else
-      return false
-   end
+   if math.floor(num % 2) == 1 then return true else return false end
 end
 
+function rand2 ()
+   return math.random() * 2 - 1
+end
 
+--[[
+function linlin (num, inmin, inmax, outmin, outmax)
+   local inmin = inmin or 0
+   local inmax = inmin or 1
+   local outmin = outmin or 1
+   local outmax = outmax or 100
+   -- TODO !!!!
+   return num
+end
+
+-- TODO: linlin, linexp, explin, expexp
+--]]
+
+--------------------------------------------------------------------------------
+-- NUMBERS RANGE
 function clip (num, min, max)
    if (not min) and (not max) then
       max = 1
@@ -102,4 +78,22 @@ function wrap (num, min, max)
    else
       return (range - (num % range)) + min
    end
+end
+--------------------------------------------------------------------------------
+-- TABLES
+function choose (t)
+   return t[ math.rand(#t) ]
+end
+
+function wrapindex (t, i)
+   return t[ ((i-1) % #t) +1 ]
+end
+
+function clipindex (t, i)
+   if i > #t then i = #t elseif i < 1 then i = 1 end
+   return t[i]
+end
+
+function foldindex (t, i)
+   --  TODO
 end

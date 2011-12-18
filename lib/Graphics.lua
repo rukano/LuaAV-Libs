@@ -1,67 +1,27 @@
-local gl = require("opengl")
-local GL = gl
-local sketch = require("opengl.sketch")
-local Draw = require("opengl.Draw")
-local Window = Window
-
 local color = require("color")
 local RGBtoHSL = color.RGBtoHSL
 local HSLtoRGB = color.HSLtoRGB
 
-local unpack = unpack
-local print = print
-local pairs, ipairs = pairs, ipairs
-local require = require
-
-local math = math
-local sin = math.sin
-local cos = math.cos
-local tan = math.tan
-local pi = math.pi
-
-local now = now
-local wait = wait
-local event = event
-local go = go
-
-local _G = _G
-
-
-module("ezgl")
---------------------------------------------------------------------------------
--- SETUP
-
--- gl.Clear (GL.COLOR_BUFFER_BIT)
--- gl.Enable(GL.DEPTH_TEST)
--- gl.ClearDepth(1.0)						
--- gl.DepthFunc(GL.LEQUAL)						
--- gl.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)		
--- gl.Enable(GL.BLEND)						
--- gl.AlphaFunc(GL.GREATER,0.1)
--- gl.Enable(GL.ALPHA_TEST)						
--- gl.Enable(GL.TEXTURE_2D)						
--- gl.Enable(GL.CULL_FACE)
-
 --------------------------------------------------------------------------------
 -- EZ GL
-function initGL (mode)
+function initgl (mode)
    local mode = mode or "alpha"
    print(mode)
 end
 
-function setColor (r, g, b, a)
+function setcolor (r, g, b, a)
    gl.Color(r, g, b, a)
 end
 
-function setColor255(r,g,b,a)
+function setcolor255(r,g,b,a)
    setColor(r/255,g/255,b/255,a/255)
 end
 
-function setColorHSL(h,s,l,a)
+function setcolorhsl(h,s,l,a)
    setColor(unpack(HSLtoRGB({h,s,l,a})))
 end
 
-function setLineWidth(width)
+function setlinewidth(width)
    gl.LineWidth(width)
 end
 
