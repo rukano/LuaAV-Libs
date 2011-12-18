@@ -1,12 +1,19 @@
 --------------------------------------------------------------------------------
--- EZ MATH
+-- MATH
 
-PI = math.pi
+pi = math.pi
+tau = pi * 2
+PI = pi
+TAU = tau
+
 sin = math.sin
 cos = math.cos
 tan = math.tan
+tanh = math.tanh
+
 ceil = math.ceil
 floor = math.floor
+
 rand = math.rand
 
 --------------------------------------------------------------------------------
