@@ -5,3 +5,30 @@ This library is for my personal use. If you like it, you can use it.
 I won't concentrate much on programming elegance or so... the modules create a lot of globals and lots of stuff could be optimized. But anyway, this is what I use to make animations in LuaAV
 
 * TODO: copy and adapt some stuff from the processing library
+
+--------------------------------------------------------------------------------
+
+Patterns
+========
+
+This is an experimental module/library still under heavy developement. It intends tu simulate/emulate the behaviour of common Patterns like Pseq, Prand, Pwhite, etc...
+
+There are much better ways to handle the inheritance and kind of classes, but I didn't wanted to include  another libraries, so I kept it simple.
+
+
+
+Notes
+-----
+
+* Pattern is the superclass for all other patterns.
+* TODO: simulate he other patterns in the comment
+* TODO: make a better class/inheritance system
+
+
+
+Disclaimer
+__________
+
+* Don't blame me if it doesn't work.
+* Have fun if it works.
+* If you have suggestions or better implementations, please contact me.
