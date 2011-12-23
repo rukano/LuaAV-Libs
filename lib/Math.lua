@@ -14,7 +14,7 @@ tanh = math.tanh
 ceil = math.ceil
 floor = math.floor
 
-rand = math.rand
+rand = math.random
 
 --------------------------------------------------------------------------------
 -- NUMBERS
@@ -89,7 +89,7 @@ end
 --------------------------------------------------------------------------------
 -- TABLES
 function choose (t)
-   return t[ math.rand(#t) ]
+   return t[ rand(#t) ]
 end
 
 function wrapindex (t, i)
