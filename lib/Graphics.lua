@@ -7,36 +7,38 @@ local HSLtoRGB = color.HSLtoRGB
 
 --------------------------------------------------------------------------------
 -- EZ GL
+function clearColor ()
+   gl.Clear(GL.COLOR_BUFFER_BIT)
+end
 
-function clearScreen ()
+function clearAll ()
    gl.Clear(GL.COLOR_BUFFER_BIT)
    gl.Clear(GL.DEPTH_BUFFER_BIT)
    gl.Clear(GL.ACCUM_BUFFER_BIT)   
 end
 
-
-function initGL (mode)
+function setBlend (mode)
    local mode = mode or "alpha"
-   if win then 
-      gl.ClearColor(win.clearcolor)
-   else
-      gl.ClearColor(0, 0, 0, 1)      
-   end
-   gl.Enable(GL.BLEND)
-   gl.Enable(GL.POINT_SMOOTH)
-
    if mode == "add" then
       gl.BlendFunc(GL.ONE, GL.ONE);
    elseif mode == "alpha" then
       gl.BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
-   elseif mode == "normal" then
+   elseif mode == "filter" then
+      gl.BlendFunc(GL.DST_COLOR, GL.ZERO)      
+   elseif mode == "normal" then -- WTF?
       gl.BlendFunc(GL.SRC_ALPHA, GL.ONE)
    else
-      print("I only know how to do 'normal', 'alpha' and 'add' blending and even those are wrong")
+      nil
    end
+end
 
+function initGL (mode)
+   if win then  gl.ClearColor(win.clearcolor) else gl.ClearColor(0, 0, 0, 1) end
+   gl.Enable(GL.BLEND)
+   gl.Enable(GL.POINT_SMOOTH)
    gl.Disable(GL.DEPTH_TEST)
    gl.DepthFunc(GL.NEVER)
+   setBlend(mode)
 end
 
 function setColor (r, g, b, a)
