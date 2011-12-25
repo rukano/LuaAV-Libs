@@ -57,7 +57,7 @@ function clip (num, min, max)
    return math.max(math.min(num, max), min)
 end
 
-function fold (num, min, max)
+function wrap (num, min, max)
    if (not min) and (not max) then
       max = 1
       min = 0
@@ -68,7 +68,7 @@ function fold (num, min, max)
    return ((num - min) % (max - min)) + min
 end
 
-function wrap (num, min, max)
+function fold (num, min, max)
    if (not min) and (not max) then
       max = 1
       min = 0
