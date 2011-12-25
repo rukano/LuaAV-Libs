@@ -1,6 +1,5 @@
 local Array = require("Array")
 
-
 function copyrange(o, x, y, w, h)
    local a = Array{components=4,type=Array.UInt8,dim={w,h},align=4}
    for i=0, w do
