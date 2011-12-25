@@ -27,8 +27,6 @@ function setBlend (mode)
       gl.BlendFunc(GL.DST_COLOR, GL.ZERO)      
    elseif mode == "normal" then -- WTF?
       gl.BlendFunc(GL.SRC_ALPHA, GL.ONE)
-   else
-      nil
    end
 end
 
