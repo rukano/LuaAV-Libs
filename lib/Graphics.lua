@@ -102,3 +102,52 @@ function polyline(a,b,c,d,...)
    end
    gl.End()
 end
+
+--------------------------------------------------------------------------------
+-- Textures, Images, Framebuffer, Screenshot...
+
+function crop_quad(tex, t, q)
+   local t = t or {0, 0, w, h}
+   local q = q or {-1, 1, 2, 2}
+
+   gl.TexCoord(t[1], t[2])            gl.Vertex(q[1], q[2])
+   gl.TexCoord(t[1]+t[3], t[2])       gl.Vertex(q[1] + q[3], q[2])
+   gl.TexCoord(t[1]+t[3], t[2]+t[4])  gl.Vertex(q[1] + q[3], q[2] + q[4])
+   gl.TexCoord(t[1], t[2]+t[4])       gl.Vertex(q[1], q[2] + q[4])
+end
+
+function crop_pixquad(tex, t, q)
+   local w, h = unpack(tex.dim) -- for pixel mode
+   local t = t or {0, 0, w, h}
+   local q = q or {-1, 1, 2, 2}
+   -- convert pixels to normalized
+   t[1] = t[1] / w
+   t[2] = t[2] / h
+   t[3] = t[3] / w
+   t[4] = t[4] / h
+
+   crop_quad(tex, t, q)
+end
+
+function copy_framebuffer(tex)
+   gl.ReadBuffer(GL.FRONT)
+   tex:bind()
+   gl.CopyTexImage(tex.target, 0, tex.format, 0, 0, tex.dim[1], tex.dim[2], 0)
+   tex:unbind()
+   gl.ReadBuffer(GL.BACK)
+end
+
+function screenshot(filename)
+   local dest = Texture{ ctx = ctx, dim = win.dim}
+   local img = Image()
+   local path = script.path .. "/" .. filename
+
+   print("making screenshot...")
+   copy_framebuffer(dest)
+   dest:toarray()
+   img:fromarray(dest:array())
+   img:save(path)
+   print("screenshot saved in :", path)
+   return img
+end
+
