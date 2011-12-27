@@ -6,7 +6,7 @@ local RGBtoHSL = color.RGBtoHSL
 local HSLtoRGB = color.HSLtoRGB
 
 --------------------------------------------------------------------------------
--- EZ GL
+-- Common GL Functions
 function clearColor ()
    gl.Clear(GL.COLOR_BUFFER_BIT)
 end
@@ -38,6 +38,9 @@ function initGL (mode)
    gl.DepthFunc(GL.NEVER)
    setBlend(mode)
 end
+
+--------------------------------------------------------------------------------
+-- DRAW STUFF
 
 function setColor (r, g, b, a)
    gl.Color(r, g, b, a)
