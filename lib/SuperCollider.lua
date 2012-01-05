@@ -29,7 +29,7 @@ At the moment there is only basic support for starting synth with names and sett
 local osc = require("osc")
 
 local sc = {}
-sc.app = "~/.sclang/scsynth"
+sc.app = "/Applications/SuperCollider/scsynth"
 sc.addr = '127.0.0.1'
 sc.port =  57117
 sc.langPort = 57120
@@ -45,31 +45,19 @@ sc.lang =  osc.Send(sc.addr, sc.langPort) -- sc.lang:send("/cmd", args)
 --    end
 -- end
 
--- if not sc.receiving then
---    sc.receiving = true
---    go(function()
--- 	 while true do
--- 	    get_osc()
--- 	    wait(1/100) -- finetuning/more efficiency?
--- 	 end
---       end)
--- end
-
 --------------------------------------------------------------------------------
 -- SERVER
-function sc:boot (mode)
-   local mode = mode or "u" -- Udp or Tcp
-   local cmd =
-      self.app
-      .. " -" .. mode .. " "
-      .. self.port ..
-      " > synth_log &"
+function sc:boot ()
+   local opt = " -u " .. self.port
+   local cmd = self.app .. opt .. " &"
    local code = os.execute(cmd)
+--   local process = io.popen(cmd, 'r')
+--    print("file:", process:read("*all"))
    if code == 0 then
       print("Server booted on port " .. self.port)
       self.isRunning = true
    else
-      print("WARNING: Couldn't start scsynth")
+      print("\n\n\n*** ERROR ***")
    end
    -- TODO: get response from server
    -- TODO: store PID and so on
@@ -88,9 +76,6 @@ function sc:kill()
    -- TODO: kill PID
 end
 
---sc:boot()
---sc:quit()
-
 --------------------------------------------------------------------------------
 -- SYNTHS (via osc)
 function sc:synth(name, id, args)
@@ -98,27 +83,21 @@ function sc:synth(name, id, args)
    local id = id or 1000
    local args = args or {}
    self.osc:send("/s_new", name, id)
-   print("new", name, id, args)
 end
 
 function sc:set(id, args)
    self.osc:send("/n_set", id, unpack(args))
-   print("set", id, args)
 end
 
 function sc:free(id)
    self.osc:send("/n_free", id)
-   print("free")
 end
 
---go(0, function () sc:synth("default", 1000) end)
---go(1, function () sc:set(1000, {"gate", 0}) end)
-
---sc.osc:send("/status")
-
+-- go(0, function () sc:synth("default", 1000) end)
+-- go(1, function () sc:set(1000, {"gate", 0}) end)
 
 --------------------------------------------------------------------------------
--- Synth Objects?
+-- Synth Objects
 
 -- Protoype / Defualt synth
 -- local proto = {}
@@ -158,45 +137,3 @@ end
 sc.SynthLib = Synth
 
 return sc
-
---a = Synth:new()
-
---go(1, function () a:set("freq", 1000.0, "gate", 0) seq=false end)
-
-
---print(a.id)
-
--- print(a)
-
---print(#a)
-
--- b = Synth()
--- b:set("freq", 880)
--- b:set("gate, 0")
-
---sc:freeAll()
-
-
-
-
--- print("proto:", proto)
--- print("metatable:", getmetatable(a))
--- print("instance of a:", a)
--- print("size of a:", #a)
--- print("name of a:", a.name, "id:", a.id)
-
---print(a.name)
-
-
---sender:send("/s_new", "default", 1000)
---go(2, function () sender:send("/n_set", 1000, "gate", 0) end)
-
-
-
-
-
--- example using bundles:
--- oscout:send{
---    { addr="/mousebun1", event, button, x, y },
---    { addr="/mousebun2", event, button, x, y }
--- 	   }
