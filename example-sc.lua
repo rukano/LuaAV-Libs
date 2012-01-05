@@ -1,28 +1,30 @@
--- highly experimental....!!! 
--- not everything works....!!!
-
-sc = require("lib.SuperCollider")
-Synth = sc.SynthLib
-
 --[[
-boot the server manually from the terminal:
-./scsynth -u 57117
-sc:boot() not working yet...
+Testing scsynth from Lua -> !!! highly experimental !!! almost nothing works !!!
+
+-- sc:boot() not working yet!
+
+start scsynth from the terminal like:
+
+> cd /you/path/to/SuperCollider
+> ./scsynth -u 57117
+
 --]]
 
-a = Synth:new()
-go(1, function ()
-      a:set("freq", 1234.0)
-      wait(0.5)
-      a:set("freq", math.random(400, 800))
-      wait(0.5)
-      a:set("freq", math.random(400, 800))
-      wait(0.5)
-      a:set("freq", math.random(400, 800))
+local sc = require("lib.SuperCollider")
+local Synth = sc.SynthLib
+
+go(function ()
+      a = Synth:new()
       wait(1)
+      for i=1, 20 do
+	 a:set("freq", math.random(400, 800))
+	 wait(i/100)
+      end
+      a:set("freq", 2000)
       a:set("gate", 0)
-      wait(1)
       end)
 
--- Panic?
+-- Panic:
 -- sc:freeAll()
+
+
