@@ -4,9 +4,8 @@ Libraries for easy coding in LuaAV
 This library is for my personal use. If you like it, you can use it.
 I won't concentrate much on programming elegance or so... the modules create a lot of globals and lots of stuff could be optimized. But anyway, this is what I use to make animations in LuaAV
 
-~~~~~~~~~~~~~~
-~Instructions~
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ -- Instructions --
 
 1. clone the repository or download the lib folder
 2. rename that lib folder to 'rukano' (or whatever)
@@ -17,8 +16,8 @@ require("rukano.Graphics")
 require("rukano.Patterns")
 win = require("rukano.Window")
 require("rukano.SuperCollider")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
---------------------------------------------------------------------------------
 
 Patterns
 ========
@@ -51,7 +50,7 @@ Notes
 * TODO: make a better class/inheritance system
 
 Disclaimer
-__________
+----------
 
 * Don't blame me if it doesn't work.
 * Have fun if it works.
