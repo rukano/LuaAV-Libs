@@ -10,10 +10,15 @@ start scsynth from the terminal like:
 
 --]]
 
+os.execute("cd /Applications/SuperCollider/ && ./scsynth -u 57117 -R 0 &")
+
+
+
 local sc = require("lib.SuperCollider")
 local Synth = sc.SynthLib
 
-go(function ()
+go(2, function ()
+      print("start")
       a = Synth:new()
       wait(1)
       for i=1, 20 do
@@ -22,6 +27,7 @@ go(function ()
       end
       a:set("freq", 2000)
       a:set("gate", 0)
+      print("end")
       end)
 
 -- Panic:

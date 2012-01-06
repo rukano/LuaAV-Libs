@@ -29,7 +29,7 @@ At the moment there is only basic support for starting synth with names and sett
 local osc = require("osc")
 
 local sc = {}
-sc.app = "/Applications/SuperCollider/scsynth"
+sc.app = "/Applications/SuperCollider/"
 sc.addr = '127.0.0.1'
 sc.port =  57117
 sc.langPort = 57120
@@ -48,8 +48,8 @@ sc.lang =  osc.Send(sc.addr, sc.langPort) -- sc.lang:send("/cmd", args)
 --------------------------------------------------------------------------------
 -- SERVER
 function sc:boot ()
-   local opt = " -u " .. self.port
-   local cmd = self.app .. opt .. " &"
+   local opt = "-u " .. self.port
+   local cmd = "cd "..self.app.." && scsynth " .. opt .. " &"
    local code = os.execute(cmd)
 --   local process = io.popen(cmd, 'r')
 --    print("file:", process:read("*all"))
